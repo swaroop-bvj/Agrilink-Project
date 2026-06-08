@@ -1,0 +1,78 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS Agrilink 
+DEFAULT CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+
+USE Agrilink;
+
+-- Table: users
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `aadhaar` varchar(12) NOT NULL,
+  `mobile` varchar(10) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `otp` varchar(6) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_mobile` (`mobile`),
+  UNIQUE KEY `unique_aadhaar` (`aadhaar`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: otp_table
+CREATE TABLE `otp_table` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mobile` varchar(15) NOT NULL,
+  `otp` varchar(6) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: crop_guides
+CREATE TABLE `crop_guides` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crop_name` varchar(255) NOT NULL,
+  `guide_title_en` varchar(255) NOT NULL,
+  `guide_text_en` text NOT NULL,
+  `guide_title_te` varchar(255) DEFAULT NULL,
+  `guide_text_te` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: crop_buyers
+CREATE TABLE `crop_buyers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_en` varchar(100) NOT NULL,
+  `name_te` varchar(100) NOT NULL,
+  `place_en` varchar(100) NOT NULL,
+  `place_te` varchar(100) NOT NULL,
+  `contact` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: crop_sellers
+CREATE TABLE `crop_sellers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_en` varchar(100) NOT NULL,
+  `name_te` varchar(100) NOT NULL,
+  `crop_en` varchar(100) NOT NULL,
+  `crop_te` varchar(100) NOT NULL,
+  `contact` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table: farmers
+CREATE TABLE `farmers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_en` varchar(100) NOT NULL,
+  `name_te` varchar(100) NOT NULL,
+  `village_en` varchar(100) NOT NULL,
+  `village_te` varchar(100) NOT NULL,
+  `contact` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
